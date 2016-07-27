@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet-BeYourBest-e3f6136c-f745-4561-8f5c-d3f5252efecd",
 
   "dependencies": {
@@ -42,7 +42,9 @@
     "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
-    }
+    },
+    "DAL": "1.0.0-*",
+    "BusinessLogic": "1.0.0-*"
   },
 
   "tools": {
