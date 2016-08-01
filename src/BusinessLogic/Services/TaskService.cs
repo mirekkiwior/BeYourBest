@@ -5,7 +5,6 @@ using System.Linq;
 using DAL.Data;
 using DAL.Enums;
 using DAL.Models;
-using Task = DAL.Models.Task;
 
 namespace BusinessLogic.Services
 {
@@ -13,7 +12,7 @@ namespace BusinessLogic.Services
     {
         public void AddNewTask(string name, string description, DateTime deadline, TaskTypes type, Goal goal)
         {
-            Task task = new Task()
+            Quest quest = new Quest()
             {
                 Name = name,
                 Description = description,
@@ -22,10 +21,10 @@ namespace BusinessLogic.Services
                 Goal = goal
             };
 
-            InsertOrUpdateTask(task);
+            InsertOrUpdateTask(quest);
         }
 
-        public IEnumerable<Task> GeTasksByGoal(Goal goal)
+        public IEnumerable<Quest> GeTasksByGoal(Goal goal)
         {
             using (ApplicationDbContext dbContext = new ApplicationDbContext(null))
             {
@@ -33,25 +32,25 @@ namespace BusinessLogic.Services
             }
         }
 
-        public void UpdateTask(Task task)
+        public void UpdateTask(Quest quest)
         {
-            InsertOrUpdateTask(task);
+            InsertOrUpdateTask(quest);
         }
 
-        public void DeleteTask(Task task)
+        public void DeleteTask(Quest quest)
         {
             using (ApplicationDbContext dbContext = new ApplicationDbContext(null))
             {
-                dbContext.Tasks.Remove(task);
+                dbContext.Tasks.Remove(quest);
                 dbContext.SaveChanges();
             }
         }
 
-        private void InsertOrUpdateTask(Task task)
+        private void InsertOrUpdateTask(Quest quest)
         {
             using (ApplicationDbContext dbContext = new ApplicationDbContext(null))
             {
-                dbContext.Tasks.Add(task);
+                dbContext.Tasks.Add(quest);
                 dbContext.SaveChanges();
             }
         }

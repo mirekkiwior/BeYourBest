@@ -8,8 +8,8 @@ using DAL.Data;
 namespace DAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20160729140710_AddedPriorDataStructure")]
-    partial class AddedPriorDataStructure
+    [Migration("20160801202123_ChangedTaskTableName")]
+    partial class ChangedTaskTableName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

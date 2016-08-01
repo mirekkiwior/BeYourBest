@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+using DAL.Data;
 
 namespace DAL.Data.Migrations
 {
@@ -54,7 +56,7 @@ namespace DAL.Data.Migrations
                     b.ToTable("Goals");
                 });
 
-            modelBuilder.Entity("DAL.Models.Task", b =>
+            modelBuilder.Entity("DAL.Models.Quest", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -250,7 +252,7 @@ namespace DAL.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("DAL.Models.Task", b =>
+            modelBuilder.Entity("DAL.Models.Quest", b =>
                 {
                     b.HasOne("DAL.Models.Goal", "Goal")
                         .WithMany("Tasks")

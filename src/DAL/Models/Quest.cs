@@ -5,7 +5,7 @@ using DAL.Enums;
 
 namespace DAL.Models
 {
-    public class Task
+    public class Quest
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

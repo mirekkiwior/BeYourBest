@@ -8,7 +8,7 @@ namespace DAL.Data
     {
         public DbSet<Goal> Goals { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Quest> Tasks { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
