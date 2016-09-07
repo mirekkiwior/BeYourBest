@@ -3,7 +3,14 @@
     $("#wrapper").addClass("toggled");
 });
 
-$("#goalsLink, #categoriesLink").click(function (e) {
+$("#goalsLink").click(function (e) {
     e.preventDefault();
+    $.get("/Main/LoadGoals", function (data) { $("#sidebar-wrapper").html(data); });
+    $("#wrapper").removeClass("toggled");
+});
+
+$("#categoriesLink").click(function (e) {
+    e.preventDefault();
+    $.get("/Main/LoadCategories", function (data) { $("#sidebar-wrapper").html(data); });
     $("#wrapper").removeClass("toggled");
 });

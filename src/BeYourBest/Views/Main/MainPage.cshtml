@@ -1,4 +1,5 @@
-﻿@{
+﻿@using DAL.Enums
+@{
     Layout = "_LoggedUserLayout";
 }
 
@@ -31,23 +32,9 @@
 <div id="wrapper" class="toggled">
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#">Nagłówek</a>
-            </li>
-            <li>
-                <a href="#">Przykładowa opcja 1</a>
-            </li>
-            <li>
-                <a href="#">Przykładowa opcja 2</a>
-            </li>
-            <li>
-                <a href="#">Przykładowa opcja 3</a>
-            </li>
-        </ul>
     </div>
+    @*@await Component.InvokeAsync("LeftMenu", new { elementsType = LeftMenuElementsType.Category })*@
     <!-- /#sidebar-wrapper -->
-
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid">
@@ -62,4 +49,3 @@
 
 </div>
 <!-- /#wrapper -->
-
