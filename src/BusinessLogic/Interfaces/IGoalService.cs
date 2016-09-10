@@ -8,6 +8,7 @@ namespace BusinessLogic.Interfaces
     {
         void AddNewGoal(string title, string description, DateTime deadline, Category category);
         IEnumerable<Goal> GetGoalsByCategory(Category category);
+        IEnumerable<Goal> GetGoalsByUser(string userId);
         void UpdateGoal(Goal goal);
         void DeleteGoal(Goal goal);
     }

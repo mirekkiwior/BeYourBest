@@ -9,6 +9,13 @@ namespace BusinessLogic.Services
 {
     public class GoalService : IGoalService
     {
+        private readonly ApplicationDbContext _dbContext;
+
+        public GoalService(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public void AddNewGoal(string title, string description, DateTime deadline, Category category)
         {
             Goal goal = new Goal()
@@ -23,10 +30,12 @@ namespace BusinessLogic.Services
 
         public IEnumerable<Goal> GetGoalsByCategory(Category category)
         {
-            using (ApplicationDbContext dbContext = new ApplicationDbContext(null))
-            {
-                return dbContext.Goals.Where(g => g.Category.Id == category.Id);
-            }
+            return _dbContext.Goals.Where(g => g.Category.Id == category.Id);
+        }
+
+        public IEnumerable<Goal> GetGoalsByUser(string userId)
+        {
+            return _dbContext.Goals.Where(g => g.Category.Owner.Id == userId);
         }
 
         public void UpdateGoal(Goal goal)
@@ -36,20 +45,14 @@ namespace BusinessLogic.Services
 
         public void DeleteGoal(Goal goal)
         {
-            using (ApplicationDbContext dbContext = new ApplicationDbContext(null))
-            {
-                dbContext.Goals.Remove(goal);
-                dbContext.SaveChanges();
-            }
+            _dbContext.Goals.Remove(goal);
+            _dbContext.SaveChanges();
         }
 
         private void InsertOrUpdateGoal(Goal goal)
         {
-            using (ApplicationDbContext dbContext = new ApplicationDbContext(null))
-            {
-                dbContext.Goals.Add(goal);
-                dbContext.SaveChanges();
-            }
+            _dbContext.Goals.Add(goal);
+            _dbContext.SaveChanges();
         }
     }
 }

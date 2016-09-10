@@ -18,5 +18,6 @@ namespace DAL.Models
         public TaskTypes Type { get; set; }
         [Required]
         public Goal Goal { get; set; }
+        public bool IsDone { get; set; }
     }
 }

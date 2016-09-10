@@ -10,6 +10,13 @@ namespace BusinessLogic.Services
 {
     public class TaskService : ITaskService
     {
+        private readonly ApplicationDbContext _dbContext;
+
+        public TaskService(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public void AddNewTask(string name, string description, DateTime deadline, TaskTypes type, Goal goal)
         {
             Quest quest = new Quest()
@@ -24,12 +31,9 @@ namespace BusinessLogic.Services
             InsertOrUpdateTask(quest);
         }
 
-        public IEnumerable<Quest> GeTasksByGoal(Goal goal)
+        public IEnumerable<Quest> GeTasksByGoal(int goalId)
         {
-            using (ApplicationDbContext dbContext = new ApplicationDbContext(null))
-            {
-                return dbContext.Tasks.Where(t => t.Goal.Id == goal.Id);
-            }
+            return _dbContext.Tasks.Where(t => t.Goal.Id == goalId);
         }
 
         public void UpdateTask(Quest quest)
@@ -39,20 +43,14 @@ namespace BusinessLogic.Services
 
         public void DeleteTask(Quest quest)
         {
-            using (ApplicationDbContext dbContext = new ApplicationDbContext(null))
-            {
-                dbContext.Tasks.Remove(quest);
-                dbContext.SaveChanges();
-            }
+            _dbContext.Tasks.Remove(quest);
+            _dbContext.SaveChanges();
         }
 
         private void InsertOrUpdateTask(Quest quest)
         {
-            using (ApplicationDbContext dbContext = new ApplicationDbContext(null))
-            {
-                dbContext.Tasks.Add(quest);
-                dbContext.SaveChanges();
-            }
+            _dbContext.Tasks.Add(quest);
+            _dbContext.SaveChanges();
         }
     }
 }

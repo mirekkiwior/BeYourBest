@@ -8,6 +8,13 @@ namespace BusinessLogic.Services
 {
     public class CategoryService : ICategoryService
     {
+        private readonly ApplicationDbContext _dbContext;
+
+        public CategoryService(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public void AddNewCategory(string name, User owner)
         {
             Category category = new Category()
@@ -21,10 +28,8 @@ namespace BusinessLogic.Services
 
         public IEnumerable<Category> GetCategoriesByUser(string userId)
         {
-            using (ApplicationDbContext dbContext = new ApplicationDbContext(null))
-            {
-                return dbContext.Categories.Where(c => c.Owner.Id == userId);
-            }
+            return _dbContext.Categories.Where(c => c.Owner.Id == userId);
+
         }
 
         public void UpdateCategory(Category category)
@@ -34,20 +39,14 @@ namespace BusinessLogic.Services
 
         public void DeleteCategory(Category category)
         {
-            using (ApplicationDbContext dbContext = new ApplicationDbContext(null))
-            {
-                dbContext.Categories.Remove(category);
-                dbContext.SaveChanges();
-            }
+            _dbContext.Categories.Remove(category);
+            _dbContext.SaveChanges();
         }
 
         private void InsertOrUpdateCategory(Category category)
         {
-            using (ApplicationDbContext dbContext = new ApplicationDbContext(null))
-            {
-                dbContext.Categories.Add(category);
-                dbContext.SaveChanges();
-            }
+            _dbContext.Categories.Add(category);
+            _dbContext.SaveChanges();
         }
     }
 }
