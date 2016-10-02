@@ -5,7 +5,7 @@ using DAL.Enums;
 
 namespace DAL.Models
 {
-    public class Quest
+    public class Task
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -14,10 +14,9 @@ namespace DAL.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime Deadline { get; set; }
-        [Required]
-        public TaskTypes Type { get; set; }
-        [Required]
+        public int RepeatabilityInDays { get; set; }
         public Goal Goal { get; set; }
         public bool IsDone { get; set; }
+        public bool IsImportant { get; set; }
     }
 }

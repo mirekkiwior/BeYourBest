@@ -17,6 +17,6 @@ namespace DAL.Models
         [Required]
         public Category Category { get; set; }
 
-        public virtual List<Quest> Tasks { get; set; }
+        public virtual List<Task> Tasks { get; set; }
     }
 }

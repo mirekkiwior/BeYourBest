@@ -57,7 +57,7 @@ namespace DAL.Data.Migrations
                     b.ToTable("Goals");
                 });
 
-            modelBuilder.Entity("DAL.Models.Quest", b =>
+            modelBuilder.Entity("DAL.Models.Task", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -255,7 +255,7 @@ namespace DAL.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("DAL.Models.Quest", b =>
+            modelBuilder.Entity("DAL.Models.Task", b =>
                 {
                     b.HasOne("DAL.Models.Goal", "Goal")
                         .WithMany("Tasks")

@@ -18,33 +18,35 @@ namespace BusinessLogic.Services
             _dbContext = dbContext;
         }
 
-        public void AddNewTask(string name, string description, DateTime deadline, TaskTypes type, Goal goal)
+        public void AddNewTask(string name, string description, DateTime deadline, Goal goal, int repeatabilityInDays)
         {
-            Quest quest = new Quest()
+            Task task = new Task()
             {
                 Name = name,
                 Description = description,
                 Deadline = deadline,
-                Type = type,
-                Goal = goal
+                Goal = goal,
+                IsDone = false,
+                IsImportant = false,
+                RepeatabilityInDays = repeatabilityInDays
             };
 
-            InsertOrUpdateTask(quest);
+            InsertOrUpdateTask(task);
         }
 
-        public IEnumerable<Quest> GetTasksByGoal(int goalId)
+        public IEnumerable<Task> GetTasksByGoal(int goalId)
         {
             return _dbContext.Tasks.Where(t => t.Goal.Id == goalId);
         }
 
-        public void UpdateTask(Quest quest)
+        public void UpdateTask(Task task)
         {
-            InsertOrUpdateTask(quest);
+            InsertOrUpdateTask(task);
         }
 
-        public void DeleteTask(Quest quest)
+        public void DeleteTask(Task task)
         {
-            _dbContext.Tasks.Remove(quest);
+            _dbContext.Tasks.Remove(task);
             _dbContext.SaveChanges();
         }
 
@@ -56,13 +58,13 @@ namespace BusinessLogic.Services
             InsertOrUpdateTask(task);
         }
 
-        private void InsertOrUpdateTask(Quest quest)
+        private void InsertOrUpdateTask(Task task)
         {
-            if (quest.Id == default(int))
-                _dbContext.Tasks.Add(quest);
+            if (task.Id == default(int))
+                _dbContext.Tasks.Add(task);
             else
             {
-                _dbContext.Entry(quest).State = EntityState.Modified;
+                _dbContext.Entry(task).State = EntityState.Modified;
             }
             _dbContext.SaveChanges();
         }
