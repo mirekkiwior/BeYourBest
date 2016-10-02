@@ -5,6 +5,7 @@ using System.Linq;
 using DAL.Data;
 using DAL.Enums;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.Services
 {
@@ -31,7 +32,7 @@ namespace BusinessLogic.Services
             InsertOrUpdateTask(quest);
         }
 
-        public IEnumerable<Quest> GeTasksByGoal(int goalId)
+        public IEnumerable<Quest> GetTasksByGoal(int goalId)
         {
             return _dbContext.Tasks.Where(t => t.Goal.Id == goalId);
         }
@@ -47,9 +48,22 @@ namespace BusinessLogic.Services
             _dbContext.SaveChanges();
         }
 
+        public void ChangeIsDoneValue(int taskId)
+        {
+            var task = _dbContext.Tasks.FirstOrDefault(t => t.Id == taskId);
+            if (task == null) return;
+            task.IsDone = !task.IsDone;
+            InsertOrUpdateTask(task);
+        }
+
         private void InsertOrUpdateTask(Quest quest)
         {
-            _dbContext.Tasks.Add(quest);
+            if (quest.Id == default(int))
+                _dbContext.Tasks.Add(quest);
+            else
+            {
+                _dbContext.Entry(quest).State = EntityState.Modified;
+            }
             _dbContext.SaveChanges();
         }
     }

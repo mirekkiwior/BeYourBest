@@ -1,0 +1,30 @@
+﻿@model IEnumerable<BeYourBest.Models.MainViewModels.TasksListViewModel>
+
+<table class="table">
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.CheckBoxFor(modelItem => item.IsDone, new { @class = "isDoneCheckBox", data_taskId = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script>
+
+    $(".isDoneCheckBox").click(function (e) {
+        var id = $(this).attr("data-taskId");
+        $.ajax({
+            url: "/Main/ChangeIsDoneValue",
+            type: "post",
+            data: { taskId: id }
+        });
+    });
+
+</script>

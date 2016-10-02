@@ -1,4 +1,4 @@
-﻿$("#urgentTasksLink, #otherTasksLink").click(function (e) {
+﻿$("#urgentTasksLink, #otherTasksLink, .leftMenuLink").click(function (e) {
     e.preventDefault();
     $("#wrapper").addClass("toggled");
 });

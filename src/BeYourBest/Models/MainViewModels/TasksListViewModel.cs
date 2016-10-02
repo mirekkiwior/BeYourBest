@@ -2,7 +2,7 @@
 
 namespace BeYourBest.Models.MainViewModels
 {
-    public class TaskListViewModel
+    public class TasksListViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
